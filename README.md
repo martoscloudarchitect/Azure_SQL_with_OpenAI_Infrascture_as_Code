@@ -171,7 +171,7 @@ To succeed in this project, you should have the following skills:
 
 1. **Clone the Repository**:
     ```sh
-    git clone https://github.com/yourusername/Azure_AIML_Deployment.git
+    git clone https://github.com/martoscloudarchitect/Azure_SQL_with_OpenAI_Infrascture_as_Code.git
     cd Azure_AIML_Deployment
     ```
 
