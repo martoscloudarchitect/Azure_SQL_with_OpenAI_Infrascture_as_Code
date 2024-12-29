@@ -1,0 +1,15 @@
+# Install Base Libraries
+numpy>=1.2,<2
+pandas==2.2.3
+sqlalchemy==2.0.36
+pyodbc==5.2.0
+python-dotenv==1.0.1
+
+# Install libraries depending on base libraries
+ipykernel
+openai
+streamlit
+langchain
+langchain-community
+langchain_openai
+pandasai

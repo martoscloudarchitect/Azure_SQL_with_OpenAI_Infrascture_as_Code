@@ -1,0 +1,19 @@
+#### Productivity with free github copilot ####
+https://code.visualstudio.com/blogs/2024/12/18/free-github-copilot
+
+#### Deploying Python 11 on Windows PC ###
+https://www.python.org/downloads/windows/
+https://www.youtube.com/watch?v=sgSg10kjZxw
+https://www.youtube.com/watch?v=kADmZMXxqo8&t
+
+
+#### Azure OpenAI ####
+https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions
+https://learn.microsoft.com/en-us/azure/ai-services/openai/api-version-deprecation
+
+#### Bicep (Related to this project) ####
+https://learn.microsoft.com/en-us/samples/azure-samples/aks-openai/aks-openai/
+
+### Deploying Azure Web App services
+https://learn.microsoft.com/en-us/answers/questions/1470782/how-to-deploy-a-streamlit-application-on-azure-app
+https://www.youtube.com/watch?v=kHz6sz0jVSU&list=PLHgX2IExbFos22f_v4pAsYHhZtoWjyPHg
