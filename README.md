@@ -4,7 +4,7 @@
 
 The Azure AIML Application is designed to empower users with advanced data analytics and natural language processing capabilities, leveraging the power of Azure's AI and Machine Learning services. 
 
-This application seamlessly integrates with Azure's robust infrastructure to provide a user-friendly interface for interacting with complex datasets, specifically focusing on Garmin activity data.
+This application seamlessly integrates with Azure's robust infrastructure to provide a user-friendly interface for interacting with complex datasets, specifically focusing on my Garmin activity data stored in a Azure SQL Database.
 
 ![alt text](images/application_overview.jpg)
 
