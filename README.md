@@ -6,6 +6,8 @@ The Azure AIML Application is designed to empower users with advanced data analy
 
 This application seamlessly integrates with Azure's robust infrastructure to provide a user-friendly interface for interacting with complex datasets, specifically focusing on Garmin activity data.
 
+![alt text](images/application_overview.jpg)
+
 ## Table of Content
 
 - [Azure AIML Deployment](#azure-aiml-deployment)
@@ -53,6 +55,18 @@ To deploy this project, you will need the following Azure resources:
 - **Azure AI Search**: To perform search queries.
 - **Azure SQL Database**: To store and manage Garmin activity data.
 - **Azure Resource Group**: To organize and manage related resources.
+
+### Cost and Response time Benchmarks
+
+After testing for 3 consecutive days, it has been observed a total cost under 7 Dollars (roughly US $2.3 Dollars/Day or US $70 Dollars for a a few reugular daily chats with the data), as can be seen below, the number of request.
+
+Graph 1: Shows the POC Performance as response time, between 2 seconds (2k milliseconds) and 7 seconds (7k milliseconds) with the current non optimum python code as-is:
+
+![alt text](images/poc_response_time_benchmark.jpg)
+
+Graph 2: Shows the POC Cost of roughly US $7 dollars for a small load test over 4 days period.
+
+![alt text](images/POC_3days_Cost.jpg)
 
 ### Cloud Environment
 
