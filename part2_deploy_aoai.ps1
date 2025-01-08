@@ -51,7 +51,7 @@ az account set --subscription $AzureSubscriptionID
 az group list -o table
 
 # Creates a unique name for the deployment using script's name and current timestamp
-$DeploymentName = "part2_deploy_aoai" + (Get-Date).ToString("yyyyMMddHHmmss")
+$DeploymentName = "part2_deploy_aoai_" + (Get-Date).ToString("yyyyMMddHHmmss")
 
 # Deploys the target bicep file in the referenced resource group
 az deployment group create `
