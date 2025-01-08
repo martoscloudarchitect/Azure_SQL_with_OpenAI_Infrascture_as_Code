@@ -58,7 +58,7 @@ To deploy this project, you will need the following Azure resources:
 
 ### Cost and Response time Benchmarks
 
-After testing for 3 consecutive days, it has been observed a total cost under 7 Dollars (roughly US $2.3 Dollars/Day or US $70 Dollars for a a few regular daily chats with the data), as can be seen below, the number of request.
+After testing for 3 consecutive days, it has been observed a total cost under 7 Dollars (roughly US $2.3 Dollars/Day or US $70 Dollars/month, with a few regular daily chats with the data for 30 consecutive days), as can be seen below, with a sample illustrating the number of requests and the cost snapshot.
 
 Graph 1: Shows the POC Performance as response time, between 2 seconds (2k milliseconds) and 7 seconds (7k milliseconds) with the current non optimum python code as-is:
 
