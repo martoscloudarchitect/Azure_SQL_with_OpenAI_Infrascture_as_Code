@@ -51,7 +51,7 @@ if (-Not (Test-Path -Path $BicepFile)) {
 az group list -o table
 
 # Create a variable Deployment name using the script name and current date time
-$DeploymentName = "part4_deploy_AppService" + (Get-Date).ToString("yyyyMMddHHmmss")
+$DeploymentName = "part4_deploy_AppService_" + (Get-Date).ToString("yyyyMMddHHmmss")
 
 # Deploys the target bicep file in the referenced resource group
 az deployment group create `
