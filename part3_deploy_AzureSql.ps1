@@ -31,15 +31,18 @@ if (-Not (Test-Path -Path $BicepFile)) {
 }
 
 # Connect to Azure
-#az login --tenant $AzureTenantID
+az login --tenant $AzureTenantID
 #Set the default subscription
-#az account set --subscription $AzureSubscriptionID
+az account set --subscription $AzureSubscriptionID
 
 az group list -o table
+
+$DeploymentName = "part3_deploy_AzSql_" + (Get-Date).ToString("yyyyMMddHHmmss")
 
 # Deploys the target bicep file in the referenced resource group
 az deployment group create `
     --resource-group $AzureResourceGroupName `
+    --name $DeploymentName `
     --template-file $BicepFile `
     --mode Incremental `
     --verbose
