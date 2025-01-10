@@ -104,9 +104,7 @@ The sequence diagram illustration below provides a high-level overview of the st
 
 1. **User Interaction**:
 
-## Making the System Ready
-
-## Preparing the Project Requisites
+## Making the System Ready - Preparing the Project Requisites
 
 ### Prerequisite #1: Install Required PowerShell Modules
 
@@ -252,7 +250,7 @@ sequenceDiagram
 ```
 
 
-## Python Environment Setup
+### Prerequisite #3: Python Environment Setup
 
 1. **Create and Activate Virtual Environment**:
 
