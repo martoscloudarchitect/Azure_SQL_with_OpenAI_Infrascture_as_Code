@@ -50,6 +50,27 @@ graph TD
         E
     end
 ```
+## Features
+
+- **Natural Language Processing**: Utilize Azure OpenAI to interpret and respond to user queries in natural language.
+- **Data Visualization**: Present data in a clear and interactive manner using Streamlit.
+- **Seamless Integration**: Connect to Azure SQL Database to fetch and analyze data.
+- **User-Friendly Interface**: Provide a simple and engaging interface for data interaction.
+
+## Skill Levels to Succeed
+
+To succeed in this project, you should have the following skills:
+
+- **Basic Knowledge of Python**: Understanding of Python programming and libraries.
+- **Familiarity with Azure Services**: Basic knowledge of Azure services like Azure SQL Database, Azure OpenAI, and Azure App Service.
+- **Experience with Streamlit**: Familiarity with Streamlit for building interactive web applications.
+- **Understanding of Bicep**: Basic understanding of Bicep for deploying Azure resources declaratively.
+
+## Prerequisites
+
+- Python 3.11
+- Azure Subscription
+- Visual Studio Code (recommended)
 
 ### Resources Required
 
@@ -230,27 +251,6 @@ sequenceDiagram
     Application->>User: Display Garmin Activity Data
 ```
 
-## Features
-
-- **Natural Language Processing**: Utilize Azure OpenAI to interpret and respond to user queries in natural language.
-- **Data Visualization**: Present data in a clear and interactive manner using Streamlit.
-- **Seamless Integration**: Connect to Azure SQL Database to fetch and analyze data.
-- **User-Friendly Interface**: Provide a simple and engaging interface for data interaction.
-
-## Prerequisites
-
-- Python 3.11
-- Azure Subscription
-- Visual Studio Code (recommended)
-
-## Skill Levels to Succeed
-
-To succeed in this project, you should have the following skills:
-
-- **Basic Knowledge of Python**: Understanding of Python programming and libraries.
-- **Familiarity with Azure Services**: Basic knowledge of Azure services like Azure SQL Database, Azure OpenAI, and Azure App Service.
-- **Experience with Streamlit**: Familiarity with Streamlit for building interactive web applications.
-- **Understanding of Bicep**: Basic understanding of Bicep for deploying Azure resources declaratively.
 
 ## Python Environment Setup
 
