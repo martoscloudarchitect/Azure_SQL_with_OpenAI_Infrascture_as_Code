@@ -135,8 +135,15 @@ The following VS Code extensions are recommended:
 
 Once installed, you can use VS Code to open your project folder and start coding.
 
+1. **Clone the Repository**:
+The first step is to clone the this repository to your newly deployed VS Code. Runn the following `git clone` command seen below to make a local copy of this code repository into your local VS Code Project workspace.
 
-**Set Up Environment Variables:**
+    ```sh
+    git clone https://github.com/martoscloudarchitect/Azure_SQL_with_OpenAI_Infrascture_as_Code.git
+    cd <New_Project_Folder>
+    ```
+    
+**Define Your Resource and Environment Variables:**
    - The user runs various PowerShell scripts to deploy resources in Azure.
 
 Create a [.env](http://_vscodecontentref_/2) file in the root directory and add the following variables:
@@ -245,15 +252,12 @@ To succeed in this project, you should have the following skills:
 - **Experience with Streamlit**: Familiarity with Streamlit for building interactive web applications.
 - **Understanding of Bicep**: Basic understanding of Bicep for deploying Azure resources declaratively.
 
-## Setup
+## Python Environment Setup
 
-1. **Clone the Repository**:
-    ```sh
-    git clone https://github.com/martoscloudarchitect/Azure_SQL_with_OpenAI_Infrascture_as_Code.git
-    cd <New_Project_Folder>
-    ```
+1. **Create and Activate Virtual Environment**:
 
-2. **Create and Activate Virtual Environment**:
+In your local VS Code, open a new terminal session and create a virtual environment. This will wrap your project into a reproduceable environment that can be deployed with expected behavior from another environment outside your local pc.
+
     ```sh
     python -m venv .venv
     .venv\Scripts\activate  # Windows
@@ -261,8 +265,9 @@ To succeed in this project, you should have the following skills:
     ```
     ![alt text](images/virtual_environment_creation_activation.jpg)
 
+2. **Install Python Application Dependencies**:
+This python project has been defined with certain python library dependencies. Run the following command below to install the python required libraries into your newly created virtual environment.
 
-3. **Install Dependencies**:
     ```sh
     pip install -r requirements.txt
     ```
@@ -271,7 +276,7 @@ To succeed in this project, you should have the following skills:
 
 **Run the Streamlit Frontend**:
 ```sh
-  streamlit run app.py
+  streamlit run application.py
 ```
 
 ## Usage
