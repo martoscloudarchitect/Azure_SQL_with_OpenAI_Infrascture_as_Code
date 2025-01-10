@@ -15,13 +15,13 @@ load_dotenv()
 # imports the CSV file from ./data/garmin_data.csv
 # data = pd.read_csv("garminactivities.csv")
 
-## SQL Database Credentials
-# db_host="sqlserver20241219"
-# db_name="aoaidb"
-# db_user="sqlAdmin"
-# db_password="Ir0nM@n-@rm0rT3ch"
+## SQL Database Credentials Option 1 - hard Code into the python (not recommended)
+# db_host="YourServerName"
+# db_name="YourDataBaseName"
+# db_user="YourUserAdminLogin"
+# db_password="YourUswerAdminPsw"
 # driver = '{ODBC Driver 18 for SQL Server}'
-## SQL Database Credentials
+## SQL Database Credentials Option 2 - hard Code into environment variable (also not recommended)
 db_host_name=os.getenv('SQL_SERVER_NAME')
 db_name=os.getenv('SQL_DB_NAME')
 db_user=os.getenv('SQL_SERVER_USERNAME')
