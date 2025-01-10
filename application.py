@@ -12,9 +12,11 @@ import streamlit as st
 
 load_dotenv()
 
+## Alternative 1 - Read from your local file as a CSV using Pandas
 # imports the CSV file from ./data/garmin_data.csv
 # data = pd.read_csv("garminactivities.csv")
 
+## Alternative 2 - Read data from your remote Azure SQL Database
 ## SQL Database Credentials Option 1 - hard Code into the python (not recommended)
 # db_host="YourServerName"
 # db_name="YourDataBaseName"
