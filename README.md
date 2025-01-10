@@ -158,8 +158,8 @@ Once installed, you can use VS Code to open your project folder and start coding
 The first step is to clone the this repository to your newly deployed VS Code. Runn the following `git clone` command seen below to make a local copy of this code repository into your local VS Code Project workspace.
 
     ```sh
-    git clone https://github.com/martoscloudarchitect/Azure_SQL_with_OpenAI_Infrascture_as_Code.git
-    cd <New_Project_Folder>
+      git clone https://github.com/martoscloudarchitect/Azure_SQL_with_OpenAI_Infrascture_as_Code.git
+      cd <New_Project_Folder>
     ```
     
 **Define Your Resource and Environment Variables:**
@@ -257,11 +257,11 @@ sequenceDiagram
 In your local VS Code, open a new terminal session and create a virtual environment. This will wrap your project into a reproduceable environment that can be deployed with expected behavior from another environment outside your local pc.
 
     ```sh
-    python -m venv .venv
-    .venv\Scripts\activate  # Windows
-    # source .venv/bin/activate  # Linux/macOS    
+      python -m venv .venv
+      .venv\Scripts\activate  # Windows
+      # source .venv/bin/activate  # Linux/macOS    
     ```
-    ![alt text](images/virtual_environment_creation_activation.jpg)
+![alt text](images/virtual_environment_creation_activation.jpg)
 
 2. **Install Python Application Dependencies**:
 This python project has been defined with certain python library dependencies. Run the following command below to install the python required libraries into your newly created virtual environment.
