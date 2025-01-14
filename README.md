@@ -86,11 +86,14 @@ To deploy this project, you will need the following Azure resources:
 
 After testing for 3 consecutive days, it has been observed a total cost under 7 Dollars (roughly US $2.3 Dollars/Day or US $70 Dollars/month, with a few regular daily chats with the data for 30 consecutive days), as can be seen below, with a sample illustrating the number of requests and the cost snapshot.
 
-Graph 1: Shows the POC Performance as response time, between 2 seconds (2k milliseconds) and 7 seconds (7k milliseconds) with the current non optimum python code as-is:
+Graph 1: (Re)Deployment Time - Given multiple deployment attempts, with the corret local pc environment setup, the re-deployment of this solution in a whole new reagion is typically taking anywhere between about 3.5 minutes to 5 minutes to be successfully deployed
+![alt text](images/bicep_deployment_benchmark.jpg)
+
+Graph 2: End User Experience/SLA - Next image shows the POC Performance as response time, between 2 seconds (2k milliseconds) and 7 seconds (7k milliseconds) with the current non optimum python code as-is:
 
 ![alt text](images/poc_response_time_benchmark.jpg)
 
-Graph 2: Shows the POC Cost of roughly US $7 dollars for a small load test over 4 days period.
+Graph 3: Cost - this next screenshot shows the POC Cost of roughly US $7 dollars for a small load test over 4 days period, given the type of resources I've chosen and SKU.
 
 ![alt text](images/POC_3days_Cost.jpg)
 
