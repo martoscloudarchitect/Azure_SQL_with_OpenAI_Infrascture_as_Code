@@ -158,7 +158,13 @@ The following VS Code extensions are recommended:
 Once installed, you can use VS Code to open your project folder and start coding.
 
 1. **Clone the Repository**:
-The first step is to clone the this repository to your newly deployed VS Code. Runn the following `git clone` command seen below to make a local copy of this code repository into your local VS Code Project workspace.
+The first step is to clone the this repository to your newly deployed VS Code.
+
+To make it possible, let's open a new folder for this project inside your VS Code and let's open a new terminal session in side your VS Code.
+
+![alt text](images/open_new_folder_and_powershell_terminal.jpg)
+
+Now, you can run the following `git clone` command seen below to make a local copy of this code repository into your local VS Code Project workspace for this POC.
 
     ```sh
       git clone https://github.com/martoscloudarchitect/Azure_SQL_with_OpenAI_Infrascture_as_Code.git
@@ -193,17 +199,22 @@ Create a [.env](http://_vscodecontentref_/2) file in the root directory and add 
    - `part3_deployWebApp.ps1`: Creates the WebApp Service.
    - `part4_deploySQLDatabase.ps1`: Creates the SQL Database.
    - `part5_deployContainerRegistry.ps1`: Creates the Container Registry.
+  
+To run each of the powershel scripts, as is, you just need to double-click to open the file on the main project space in your VS Code, and then click on the "play button" located on the top left corner of your VS Code as per illustration picture below.
 
-2. **Azure CLI**:
+
+![alt text](images/running_powershell_click_to_run.jpg)
+
+3. **Azure CLI**:
    - Executes commands to create and deploy resources in Azure.
 
-3. **Azure**:
+4. **Azure**:
    - Manages the creation and deployment of resources.
 
-4. **WebApp**:
+5. **WebApp**:
    - Hosts the application.py script.
 
-5. **Application**:
+6. **Application**:
    - The application.py script connects to the SQL Database and Azure OpenAI Service to display Garmin activity data to the user.
 
 ```mermaid
