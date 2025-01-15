@@ -32,7 +32,7 @@ This application seamlessly integrates with Azure's robust infrastructure to pro
 ## Technical Architecture
 
 
-![alt text](solution_diagram_overview.jpg)
+![alt text](images/solution_diagram_overview.jpg)
 
 ## Features
 
