@@ -31,25 +31,9 @@ This application seamlessly integrates with Azure's robust infrastructure to pro
 
 ## Technical Architecture
 
-```mermaid
-graph TD
-    A[Users] -->|HTTP Requests| B[Azure App Service]
-    B -->|NLP Requests| C[Azure OpenAI Service]
-    B -->|Search Queries| D[Azure AI Search]
-    D -->|Fetch Data| E[Azure SQL Database]
-    C -->|Fetch Data| E
-    E -->|Return Data| D
-    D -->|Return Search Results| B
-    C -->|Return NLP Results| B
-    B -->|HTTP Responses| A
 
-    subgraph Azure Cloud
-        B
-        C
-        D
-        E
-    end
-```
+![alt text](solution_diagram_overview.jpg)
+
 ## Features
 
 - **Natural Language Processing**: Utilize Azure OpenAI to interpret and respond to user queries in natural language.
@@ -216,6 +200,59 @@ To run each of the powershel scripts, as is, you just need to double-click to op
 
 6. **Application**:
    - The application.py script connects to the SQL Database and Azure OpenAI Service to display Garmin activity data to the user.
+  
+```mermaid
+graph TD
+    A[Users] -->|HTTP Requests| B[Azure App Service]
+    B -->|NLP Requests| C[Azure OpenAI Service]
+    B -->|Search Queries| D[Azure AI Search]
+    D -->|Fetch Data| E[Azure SQL Database]
+    C -->|Fetch Data| E
+    E -->|Return Data| D
+    D -->|Return Search Results| B
+    C -->|Return NLP Results| B
+    B -->|HTTP Responses| A
+
+    subgraph Azure Cloud
+        B
+        C
+        D
+        E
+    end
+```
+
+### Prerequisite #3: Python Environment Setup
+
+1. **Create and Activate Virtual Environment**:
+
+In your local VS Code, open a new terminal session and create a virtual environment. This will wrap your project into a reproduceable environment that can be deployed with expected behavior from another environment outside your local pc.
+
+    ```sh
+      python -m venv .venv
+      .venv\Scripts\activate  # Windows
+      # source .venv/bin/activate  # Linux/macOS    
+    ```
+![alt text](images/virtual_environment_creation_activation.jpg)
+
+2. **Install Python Application Dependencies**:
+This python project has been defined with certain python library dependencies. Run the following command below to install the python required libraries into your newly created virtual environment.
+
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+## Running the Application
+
+**Run the Streamlit Frontend**:
+```sh
+  streamlit run application.py
+```
+
+## Usage
+
+- Open your web browser and navigate to the Streamlit application.
+- Interact with your Garmin activity data using natural language queries.
+- Visualize the data and gain insights through the user-friendly interface.
 
 ```mermaid
 sequenceDiagram
@@ -262,37 +299,3 @@ sequenceDiagram
     Application->>Azure: Connect to Azure OpenAI Service
     Application->>User: Display Garmin Activity Data
 ```
-
-
-### Prerequisite #3: Python Environment Setup
-
-1. **Create and Activate Virtual Environment**:
-
-In your local VS Code, open a new terminal session and create a virtual environment. This will wrap your project into a reproduceable environment that can be deployed with expected behavior from another environment outside your local pc.
-
-    ```sh
-      python -m venv .venv
-      .venv\Scripts\activate  # Windows
-      # source .venv/bin/activate  # Linux/macOS    
-    ```
-![alt text](images/virtual_environment_creation_activation.jpg)
-
-2. **Install Python Application Dependencies**:
-This python project has been defined with certain python library dependencies. Run the following command below to install the python required libraries into your newly created virtual environment.
-
-    ```sh
-    pip install -r requirements.txt
-    ```
-
-## Running the Application
-
-**Run the Streamlit Frontend**:
-```sh
-  streamlit run application.py
-```
-
-## Usage
-
-- Open your web browser and navigate to the Streamlit application.
-- Interact with your Garmin activity data using natural language queries.
-- Visualize the data and gain insights through the user-friendly interface.
