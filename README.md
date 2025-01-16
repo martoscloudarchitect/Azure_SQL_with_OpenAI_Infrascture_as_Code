@@ -52,7 +52,7 @@ To succeed in this project, you should have the following skills:
 
 ## Prerequisites
 
-- Python 3.11
+- Python 3.11.0rc2
 - Azure Subscription
 - Visual Studio Code (recommended)
 
@@ -150,7 +150,7 @@ To make it possible, let's open a new folder for this project inside your VS Cod
 
 Now, you can run the following `git clone` command seen below to make a local copy of this code repository into your local VS Code Project workspace for this POC.
 
-    ```sh
+    ```
       git clone https://github.com/martoscloudarchitect/Azure_SQL_with_OpenAI_Infrascture_as_Code.git
       cd <New_Project_Folder>
     ```
@@ -163,9 +163,10 @@ Create a [.env](http://_vscodecontentref_/2) file in the root directory and add 
     ```.env
     AZURE_TENANT_ID=<your-tenant-id>
     AZURE_SUBSCRIPTION_ID=<your-subscription-id>
+    AZURE_DEPLOYMENT_REGION=<your-resource-group-target-region>
     AZURE_RESOURCE_GROUP_NAME=<your-resource-group-name>
+    
     OPENAI_CHAT_MODEL=<your-openai-chat-model>
-
     OPENAI_API_BASE=https://<YOUR-AZURE-OPENAI-SERVICE>.api.cognitive.microsoft.com/
     OPENAI_API_KEY=<YOUR-AZURE-OPENAI-SERVICE-KEY>
     
@@ -179,10 +180,10 @@ Create a [.env](http://_vscodecontentref_/2) file in the root directory and add 
 
 1. **PowerShell Scripts**:
    - `part1_connectToAzureCreateRG.ps1`: Authenticates the user and creates a resource group.
-   - `part2_deployBicep.ps1`: Deploys the Azure OpenAI Service using a Bicep template.
-   - `part3_deployWebApp.ps1`: Creates the WebApp Service.
-   - `part4_deploySQLDatabase.ps1`: Creates the SQL Database.
-   - `part5_deployContainerRegistry.ps1`: Creates the Container Registry.
+   - `part2_deploy_aoai.ps1`: Deploys the Azure OpenAI Service using a Bicep template.
+   - `part3_deploy_AppService.ps1`: Creates the WebApp Service.
+   - `part4_deploy_AzureSql.ps1`: Creates the SQL Database.
+   - `part5_deploy_ContainerRegistry.ps1`: Creates the Container Registry.
   
 To run each of the powershel scripts, as is, you just need to double-click to open the file on the main project space in your VS Code, and then click on the "play button" located on the top left corner of your VS Code as per illustration picture below.
 
