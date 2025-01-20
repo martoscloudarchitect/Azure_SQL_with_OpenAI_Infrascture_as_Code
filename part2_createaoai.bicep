@@ -4,7 +4,7 @@
 // part1_createaoai.bicep
 param location string = resourceGroup().location
 /// Creates a new Azure OpenAI Service in the specified location using Resource Group Name and Identity
-param openaiServiceName string = 'aoaiservice${substring(resourceGroup().id, 1, 10)}'
+param openaiServiceName string = 'aoaiservice${uniqueString(resourceGroup().id, 1, 10)}'
 param openaiServiceSku string = 'S0'
 param openaiServiceKind string = 'OpenAI'
 param openaiModelSku string = 'GlobalStandard' /// GlobalStandard, Standard
