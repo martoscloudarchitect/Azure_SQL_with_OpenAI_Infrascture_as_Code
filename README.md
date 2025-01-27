@@ -237,7 +237,7 @@ graph TD
     end
 ```
 
-### Prerequisite #3: Python Environment Setup
+### Prerequisite #5: Python Environment Setup
 
 1. **Create and Activate Virtual Environment**:
 
