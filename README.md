@@ -55,6 +55,7 @@ To succeed in this project, you should have the following skills:
 - Python 3.11.0rc2
 - Azure Subscription
 - Visual Studio Code (recommended)
+- Microsoft ODBC Driver Installed on Local PC for testing before publishing on the cloud
 
 ### Resources Required
 
@@ -122,7 +123,21 @@ It is important that your PowerShell has the necessary modules installed.
     Import-Module dotenv
     ```
 
-### Prerequisite #2: Install Visual Studio Code
+### Prerequisite #2: Install ODBC
+
+Your Windows PC needs to have the Microsoft SQL ODBC Driver installed, that will allow during the local testing of the Local Python Application to interact with your Azure SQL in the cloud.
+
+Using the following Link [SQL ODBC Driver Install Page](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16)
+
+Microsoft ODBC Driver for SQL Server is a single dynamic-link library (DLL) containing run-time support for applications using native-code APIs to connect to SQL Server. Use Microsoft ODBC Driver 18 for SQL Server to create new applications or enhance existing applications that need to take advantage of newer SQL Server features.
+
+### Prerequisite #3: Install the Git Bash on your Windows PC
+
+There are many ways to make a copy of this project to your local PC. If you would like to use the git command to clone the code repository for this github project to your local pc, you will need to have Git installed. 
+
+Using the following Link [Git Bash installation Page](https://git-scm.com/downloads/win)
+
+### Prerequisite #4: Install Visual Studio Code
 
 Visual Studio Code (VS Code) is a powerful and lightweight code editor that you will use to develop and manage your project. Follow the steps below to download and install VS Code on your machine:
 
