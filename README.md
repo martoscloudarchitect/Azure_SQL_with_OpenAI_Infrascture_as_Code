@@ -54,8 +54,10 @@ To succeed in this project, you should have the following skills:
 
 - Python 3.11.0rc2
 - Azure Subscription
+- Install Git Bash
 - Visual Studio Code (recommended)
 - Microsoft ODBC Driver Installed on Local PC for testing before publishing on the cloud
+- SQL Server Management Studio (SSMS)
 
 ### Resources Required
 
@@ -90,7 +92,46 @@ This project is designed to run with Infrastructure as Code (IaC) in the Azure c
 
 The sequence diagram illustration below provides a high-level overview of the steps involved in deploying and using the application.py hosted in an Azure WebApp Service, supported by PowerShell and Bicep files.
 
-1. **User Interaction**:
+
+### Prerequisite #1: Install ODBC
+
+Your Windows PC needs to have the Microsoft SQL ODBC Driver installed, that will allow during the local testing of the Local Python Application to interact with your Azure SQL in the cloud.
+
+Using the following Link [SQL ODBC Driver Install Page](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16)
+
+Microsoft ODBC Driver for SQL Server is a single dynamic-link library (DLL) containing run-time support for applications using native-code APIs to connect to SQL Server. Use Microsoft ODBC Driver 18 for SQL Server to create new applications or enhance existing applications that need to take advantage of newer SQL Server features.
+
+### Prerequisite #2: Install SQL Server Management Studio (SSMS)
+
+SQL Server Management Studio is Microsoft's integrated environment for managing any SQL infrastructure, from SQL Server to Azure SQL. SQL Server Management Studio (SSMS) provides the ability to configure, monitor, and administer instances of SQL Server, as well as Azure SQL Managed Instance and Azure SQL databases. Use SSMS to deploy, monitor, and upgrade the data-tier components used by your applications, as well as develop queries and scripts. SSMS runs on Windows and is a free download from Microsoft.
+
+Us the following link to [Install SQL Server Management Studio (SSMS)](https://learn.microsoft.com/en-us/sql/ssms/ssms-21/faq?view=sql-server-ver16)
+
+### Prerequisite #3: Install the Git Bash on your Windows PC
+
+There are many ways to make a copy of this project to your local PC. If you would like to use the git command to clone the code repository for this github project to your local pc, you will need to have Git installed. 
+
+Using the following Link [Git Bash installation Page](https://git-scm.com/downloads/win)
+
+### Prerequisite #4: Install Visual Studio Code
+
+Visual Studio Code (VS Code) is a powerful and lightweight code editor that you will use to develop and manage your project. Follow the steps below to download and install VS Code on your machine:
+
+1. Visit the [Visual Studio Code download page](https://code.visualstudio.com/Download).
+2. Choose the appropriate installer for your operating system (Windows, macOS, or Linux).
+3. Download the installer and follow the installation instructions provided on the website.
+
+
+The following VS Code extensions are recommended:
+
+1. **Mermaid**: Helps to visualize diagrams found in this project.
+2. **Docker**: Required for later containerizing the application.
+3. **Azure Tools**: Helps with Azure libraries.
+4. **Python**: Will help handle the application that has been built in Python.
+5. **PowerShell**: Will help with handling commands in the terminal during this project.
+6. **Bicep**: Helps with handling the resource deployment templates.
+
+The following modules should be installed inside your VS Code - Open a new Powershel Terminal inside your VS Code
 
 ## Making the System Ready - Preparing the Project Requisites
 
@@ -123,36 +164,6 @@ It is important that your PowerShell has the necessary modules installed.
     Import-Module dotenv
     ```
 
-### Prerequisite #2: Install ODBC
-
-Your Windows PC needs to have the Microsoft SQL ODBC Driver installed, that will allow during the local testing of the Local Python Application to interact with your Azure SQL in the cloud.
-
-Using the following Link [SQL ODBC Driver Install Page](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16)
-
-Microsoft ODBC Driver for SQL Server is a single dynamic-link library (DLL) containing run-time support for applications using native-code APIs to connect to SQL Server. Use Microsoft ODBC Driver 18 for SQL Server to create new applications or enhance existing applications that need to take advantage of newer SQL Server features.
-
-### Prerequisite #3: Install the Git Bash on your Windows PC
-
-There are many ways to make a copy of this project to your local PC. If you would like to use the git command to clone the code repository for this github project to your local pc, you will need to have Git installed. 
-
-Using the following Link [Git Bash installation Page](https://git-scm.com/downloads/win)
-
-### Prerequisite #4: Install Visual Studio Code
-
-Visual Studio Code (VS Code) is a powerful and lightweight code editor that you will use to develop and manage your project. Follow the steps below to download and install VS Code on your machine:
-
-1. Visit the [Visual Studio Code download page](https://code.visualstudio.com/Download).
-2. Choose the appropriate installer for your operating system (Windows, macOS, or Linux).
-3. Download the installer and follow the installation instructions provided on the website.
-
-The following VS Code extensions are recommended:
-
-1. **Mermaid**: Helps to visualize diagrams found in this project.
-2. **Docker**: Required for later containerizing the application.
-3. **Azure Tools**: Helps with Azure libraries.
-4. **Python**: Will help handle the application that has been built in Python.
-5. **PowerShell**: Will help with handling commands in the terminal during this project.
-6. **Bicep**: Helps with handling the resource deployment templates.
 
 Once installed, you can use VS Code to open your project folder and start coding.
 
@@ -165,8 +176,10 @@ To make it possible, let's open a new folder for this project inside your VS Cod
 
 Now, you can run the following `git clone` command seen below to make a local copy of this code repository into your local VS Code Project workspace for this POC.
 
-    ```
+    ```sh
       git clone https://github.com/martoscloudarchitect/Azure_SQL_with_OpenAI_Infrascture_as_Code.git
+    ```
+    ```sh
       cd <New_Project_Folder>
     ```
     
@@ -175,22 +188,34 @@ Now, you can run the following `git clone` command seen below to make a local co
 
 Create a [.env](http://_vscodecontentref_/2) file in the root directory and add the following variables:
 
-    ```.env
-    AZURE_TENANT_ID=<your-tenant-id>
-    AZURE_SUBSCRIPTION_ID=<your-subscription-id>
-    AZURE_DEPLOYMENT_REGION=<your-resource-group-target-region>
-    AZURE_RESOURCE_GROUP_NAME=<your-resource-group-name>
+    ```
+    # Azure environment variables
+
+    ## Part 1: Azure CLI Configuration for Azure Environment Deployment
+    ## Your Azure Tenant
+    AZURE_TENANT_ID=
+    ## Your Billing Scope targeted to host this POC
+    AZURE_SUBSCRIPTION_ID=
+    ## Examples of Azure Regions: francecentral, brazilsouth, spaincentral, eastus, canadaeast, westus, westus3, centralus, southcentralus, swedencentral, etc.
+    AZURE_DEPLOYMENT_REGION=
+    ## Examples of disticnt resource group name: my1stbicepdemo0, my1stbicepdemo1, my1stbicepdemo2, my1stbicepdemo3, etc.
+    AZURE_RESOURCE_GROUP_NAME=
     
-    OPENAI_CHAT_MODEL=<your-openai-chat-model>
+    # Part 2: This will be populated after deploying Azure OpenAI resource, API Attributes
+    OPENAI_API_TYPE=azure
+    AZURE_OPENAI_ENDPOINT=https://<YOUR-AZURE-OPENAI-SERVICE>.api.cognitive.microsoft.com/
     OPENAI_API_BASE=https://<YOUR-AZURE-OPENAI-SERVICE>.api.cognitive.microsoft.com/
     OPENAI_API_KEY=<YOUR-AZURE-OPENAI-SERVICE-KEY>
+    OPENAI_API_VERSION=2024-10-01-preview
+    OPENAI_CHAT_MODEL=gpt-4o
     
+    # Pat 3: This Will be populated after creating a POC Azure SQL Database, Populate this from Resoruce Configuration
     SQL_SERVER_NAME=<YOUR-AZURE-SQL-SERVER-NAME>
     SQL_SERVER_ENDPOINT=<YOUR-AZURE-SQL-SERVER-NAME>.database.windows.net
     SQL_SERVER_PORT=1433
     SQL_SERVER_USERNAME=<YOUR-AZURE-SQL-SERVER-USERNAME>
     SQL_SERVER_PASSWORD=<YOUR-AZURE-SQL-SERVER-PSWD>
-    SQL_DB_NAME=<YOUR-AZURE-SQL-DATABASE-NAME>
+    SQL_DB_NAME=aoai
     ```
 
 1. **PowerShell Scripts**:
