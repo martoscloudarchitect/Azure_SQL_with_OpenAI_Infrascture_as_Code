@@ -1,0 +1,132 @@
+Got it, Diego — you’re on a 64‑bit Windows machine, and your `az` commands are crashing with a Python traceback that ends in:
+
+> `ImportError: DLL load failed while importing win32file: The specified module could not be found`
+
+This specific failure is a known Windows packaging issue that has affected certain Azure CLI builds. It typically surfaces when the bundled Python runtime inside the CLI can’t load the `pywin32`/`win32file` DLLs during telemetry initialization (via `portalocker`), and it can be made worse by leftover files from older installs or having both 32‑bit and 64‑bit installs on the same box. [\[github.com\]](https://github.com/Azure/azure-cli/issues/32045), [\[github.com\]](https://github.com/Azure/azure-cli/issues/17986)
+
+Below is a clean, 64‑bit‑only reinstall procedure that also fixes the `win32file` crash. I’ve included quick commands you can paste into an elevated PowerShell and a few sanity checks.
+
+***
+
+## Why this error happens (quick analysis)
+
+*   Recent Windows builds of Azure CLI have shown crashes on startup where the embedded Python can’t load `win32file` (a `pywin32` module) used by `portalocker` when telemetry initializes. The result: *every* `az` command fails immediately, including `az --version` and `az upgrade`. [\[github.com\]](https://github.com/Azure/azure-cli/issues/32045)
+*   On Windows, Azure CLI installs to different locations depending on architecture (`C:\Program Files (x86)\...` for 32‑bit and `C:\Program Files\...` for 64‑bit). Having residue from a prior 32‑bit install can cause module/DLL resolution to go sideways after updates. A complete uninstall + folder cleanup resolves this for most users. [\[learn.microsoft.com\]](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
+
+***
+
+## Clean uninstall (remove all architectures + residue)
+
+> **Run PowerShell as Administrator** and execute the steps in order.
+
+1.  **Use WinGet to remove all installed Azure CLI versions**
+
+```powershell
+winget list --id Microsoft.AzureCLI
+winget uninstall --id Microsoft.AzureCLI -e --all-versions
+```
+
+The `--all-versions` flag ensures portable/MSI instances are removed if WinGet knows about them. If WinGet says “No installed package found,” continue with manual steps below (it’s common if the install wasn’t tracked by WinGet). [\[learn.microsoft.com\]](https://learn.microsoft.com/en-us/windows/package-manager/winget/uninstall), [\[github.com\]](https://github.com/microsoft/winget-cli/blob/master/doc/windows/package-manager/winget/uninstall.md)
+
+2.  **Uninstall via Settings (MSI path)**  
+    Go to **Settings → Apps → Installed apps**, search **Microsoft Azure CLI**, and **Uninstall**. (On Windows 10: **Settings → Apps → Apps & features**). [\[azurelessons.com\]](https://azurelessons.com/uninstall-azure-cli/)
+
+3.  **Delete residual folders (both 32‑bit and 64‑bit)**  
+    Remove *all* of the following if they exist:
+
+```powershell
+Remove-Item "C:\Program Files\Microsoft SDKs\Azure\CLI2" -Recurse -Force
+Remove-Item "C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2" -Recurse -Force
+Remove-Item "$env:USERPROFILE\.azure" -Recurse -Force
+```
+
+Cleaning `CLI2` folders is a recommended fix from prior `win32file` incidents; it flushes stale DLLs/site‑packages that can break new builds. [\[errorism.dev\]](https://errorism.dev/issues/azure-azure-cli-dll-load-failed-while-importing-win32file-the-specified-module-could-not-be-found)
+
+4.  **Check environment variables and PATH (optional but recommended)**  
+    Make sure **PYTHONHOME** and **PYTHONPATH** are **not** set system‑wide and that PATH doesn’t contain old Azure CLI paths. Removing conflicting Python entries helps avoid import confusion in the embedded runtime. [\[learn.microsoft.com\]](https://learn.microsoft.com/en-us/answers/questions/5580091/azure-cli-commands-all-fail)
+
+5.  **Reboot**  
+    This releases file locks and ensures the PATH/environment changes take effect. (Microsoft’s guidance often calls out restarting terminals and sessions after installation changes.) [\[learn.microsoft.com\]](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
+
+***
+
+## Fresh 64‑bit install (two supported options)
+
+### Option A — Official 64‑bit MSI (recommended)
+
+Install the 64‑bit MSI directly:
+
+```powershell
+# Download and install the official 64-bit Azure CLI MSI
+Invoke-WebRequest -Uri https://aka.ms/installazurecliwindowsx64 -OutFile "$env:TEMP\AzureCLI-x64.msi"
+Start-Process msiexec.exe -Wait -ArgumentList "/i `"$env:TEMP\AzureCLI-x64.msi`" /qn"
+```
+
+The `aka.ms` link points to the x64 MSI specifically (the non‑x64 link can install 32‑bit). [\[learn.microsoft.com\]](https://learn.microsoft.com/en-us/answers/questions/1535744/installing-azure-cli-64-bit-and-what-need-change-n)
+
+### Option B — WinGet (installs the latest stable CLI for your OS)
+
+```powershell
+winget install --exact --id Microsoft.AzureCLI
+```
+
+WinGet is the Microsoft‑supported way to install/update CLI on Windows 10/11 and pulls the correct architecture for your system. If you previously had a broken/portable instance, Option A is more deterministic; otherwise, WinGet is perfectly fine. [\[learn.microsoft.com\]](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
+
+> **Tip:** If you need a *portable, non‑admin* install, Microsoft provides an official **ZIP x64** package you can unzip and add to PATH:
+
+```powershell
+# Download ZIP (x64) and use az.cmd under <unzipped>\bin
+Start-Process "https://aka.ms/installazurecliwindowszipx64"
+```
+
+This is useful on locked‑down machines, but the MSI is best for system‑wide use. [\[techcommun...rosoft.com\]](https://techcommunity.microsoft.com/blog/azuretoolsblog/zip-package-of-azure-cli-is-available-on-windows/4039425)
+
+***
+
+## Post‑install verification & path sanity checks
+
+1.  **Restart your terminal** (PowerShell or CMD) — required for PATH changes. [\[learn.microsoft.com\]](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
+
+2.  **Confirm which executable is being used**
+
+```powershell
+where.exe az
+```
+
+You should see a path under `C:\Program Files\Microsoft SDKs\Azure\CLI2\...` for the MSI (x64). Multiple entries can be normal, but if you still see a 32‑bit path under `Program Files (x86)`, remove it from PATH and/or delete the folder. [\[hungyi.net\]](https://hungyi.net/Tech/Azure-CLI-2.77.0-Broken-on-Windows)
+
+3.  **Check the CLI version**
+
+```powershell
+az --version
+```
+
+This should now print JSON‑like version info without the `win32file` crash. Microsoft’s install docs underline closing/reopening terminals and then using `az` from PowerShell or CMD. [\[learn.microsoft.com\]](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
+
+***
+
+## If the `win32file` error returns (advanced fix)
+
+On older threads, forcing a reinstall of `pywin32` within the embedded Python resolved the import error for some users, though the **preferred fix is a clean reinstall** as above:
+
+```powershell
+& "C:\Program Files\Microsoft SDKs\Azure\CLI2\python.exe" -m pip install pywin32==228 --force-reinstall
+```
+
+Again, this is a fallback; the clean removal of `CLI2` folders followed by a fresh x64 MSI install is the most reliable fix reported. [\[errorism.dev\]](https://errorism.dev/issues/azure-azure-cli-dll-load-failed-while-importing-win32file-the-specified-module-could-not-be-found)
+
+***
+
+## What you already tried and why it showed “No upgrade”
+
+Your `winget install --exact --id Microsoft.AzureCLI` output showed *“Found an existing package already installed… No available upgrade found.”* That means WinGet believes the installed package matches the latest available from its sources. In cases where the install is corrupted or mixed (32‑bit binaries still present), WinGet’s upgrade path won’t fix the underlying DLL issue — hence the need for a full uninstall + residue cleanup, then a fresh x64 install. Microsoft’s docs describe how `winget uninstall` works and when you may need to use Settings or purge leftover folders. [\[learn.microsoft.com\]](https://learn.microsoft.com/en-us/windows/package-manager/winget/uninstall)
+
+***
+
+## One‑liner summary
+
+*   **Uninstall everywhere** (WinGet + Settings), **delete** `C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2` and `C:\Program Files\Microsoft SDKs\Azure\CLI2`, **reboot**, then **install x64** via `https://aka.ms/installazurecliwindowsx64`. Verify with `where.exe az` and `az --version`. [\[azurelessons.com\]](https://azurelessons.com/uninstall-azure-cli/), [\[errorism.dev\]](https://errorism.dev/issues/azure-azure-cli-dll-load-failed-while-importing-win32file-the-specified-module-could-not-be-found), [\[learn.microsoft.com\]](https://learn.microsoft.com/en-us/answers/questions/1535744/installing-azure-cli-64-bit-and-what-need-change-n), [\[learn.microsoft.com\]](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
+
+***
+
+If you want, I can give you a small PowerShell script that automates the cleanup + x64 reinstall end‑to‑end. Also, are you using this on your local workstation or on a self‑hosted DevOps agent? (The ZIP x64 may be handy for locked‑down agents.)
