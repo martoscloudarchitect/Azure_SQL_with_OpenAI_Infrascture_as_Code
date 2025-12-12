@@ -1,0 +1,30 @@
+If you have issues with pandas and pandas AI Library,
+
+4 Steps to resolve this:
+
+1) Save a copy of your current libraries for reference in a new output file:
+pip freeze > temp_requirements.txt
+
+2) Clean your environment completely:
+pip uninstall -r temp_requirements.txt -y
+
+3) Review the current libraries against the ones I have used beloe:
+
+Libraries used that worked for the local test:
+pandas==1.5.3
+numpy>=1.23,<2
+openai==1.58.1
+streamlit==1.41.1
+sqlalchemy==2.0.36
+langchain==0.3.13
+langchain-community==0.3.13
+langchain_openai==0.2.14
+pyodbc==5.2.0
+python-dotenv==1.0.1
+pandasai==2.4.0
+seaborn
+
+4) Update the requirements.txt. and Install the following compatible versions:
+
+pip install -r requirements.txt
+-----
